@@ -1,0 +1,283 @@
+<html>
+<head>
+	<title>PokeGenJS</title>
+	<script src="typedarray.js"></script>
+	<script src="Long.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script> 
+	<link rel="stylesheet" type="text/css" href="jquery.datepick.css"> 
+	<script type="text/javascript" src="jquery.plugin.js"></script> 
+	<script type="text/javascript" src="jquery.datepick.js"></script>
+	<script type="text/javascript" src="qrcode.min.js"></script>
+</head>
+<body onload="setup()">
+	<script src="pokegenjs.js"></script>
+	<h1>PokeGenJS</h1>
+	<h2>Copyright 2015 <a href="http://twitter.com/termana">Bradley Jarvis</a></h2>
+	<a href="NOTICES">Copyright Notices</a><br><br>
+	<input type="button" id="shiny" value="Shiny" onclick="setShinyPID()">
+	PID: <input type="text" id="pid" maxlength="8" oninput="pidValidate()" disabled="true" value="00000000">
+	<input type="text" id="gender" disabled="true" value="Male">
+	<input type="button" id="genderbtn" value="Change Gender" onclick="changeGenders('gender')">
+	<input type="button" id="pidroll" value="Reroll" onclick="rollPID()">
+	<br><br>
+	Species: <select id="species" onchange="speciesChange()"></select>
+	<select id="species2" onchange="speciesChange()"></select>
+	<select id="species3" onchange="speciesChange()"></select>
+	<select id="species4" onchange="speciesChange()"></select>
+	<br><br>
+	EXP: <input type="text" id="exp" maxlength="7" value="0" disabled="true">
+	Level: <input type="text" id="lvl" maxlength="3" oninput="lvlValidate(this)" onchange="lvlValidate(this)" value="0">
+	<br><br>
+	Nature: <select id="nature"></select>
+	<br><br>
+	Held Item: <select id="heldItem"></select>
+	<select id="heldItem2"></select>
+	<select id="heldItem3"></select>
+	<select id="heldItem4"></select>
+	<br><br>
+	Friendship: <input type="text" id="fship" maxlength="3" oninput="fshipValidate()" value="0">
+	Form: <select id="form" disabled="true"></select>
+	<br><br>
+	Ability:
+	<select id="ability">
+		<option>None (0)</option>
+		<option>None (1)</option>
+		<option>None (H)</option>
+	</select>
+	<br><br>
+	Language:
+	<select id="lang">
+		<option>Japanese</option>
+		<option>English</option>
+		<option>French</option>
+		<option>Italian</option>
+		<option>German</option>
+		<option>Spanish</option>
+		<option>Korean</option>
+	</select>
+	<br><br>
+	<input type="checkbox" id="isEgg"> isEgg
+	<input type="checkbox" id="infected"> Infected
+	<input type="checkbox" id="infected"> Cured
+	<br><br>
+	Country:
+	<select id="country" onchange="populateSubRegion(null)">
+	</select>
+	<br><br>
+	Sub Region:
+	<select id="subregion">
+	</select>
+	<br><br>
+	3DS Region:
+	<select id="3dsregion">
+		<option>Japan</option>
+		<option>Americas (NA/SA)</option>
+		<option>Europe (EU/AU)</option>
+		<option>China</option>
+		<option>Korea</option>
+		<option>Taiwan</option>
+	</select>
+	<br><br>
+	Origin Game:
+	<select id="origin">
+		<option>OR</option>
+		<option>AS</option>
+		<option>X</option>
+		<option>Y</option>
+	</select>
+	<br><br>
+	Met Location:
+	<select id="metLocation">
+	</select>
+	<select id="metLocation2">
+	</select>
+	<br><br>
+	Ball:
+	<select id="ball">
+	</select>
+	<br><br>
+	Met Level:
+	<input type="text" id="metlvl" maxlength="3" oninput="lvlValidate(this)" value="0">
+	<br><br>
+	Met Date:
+	<div id="metDate"></div>
+	<br><br>
+	<input type="checkbox" id="fatefulEncounter"> Fateful Encounter
+	<br><br>
+	<input type="checkbox" id="asEgg"> As Egg
+	<br><br>
+	Egg Met Location:
+	<select id="eggMetLocation">
+	</select>
+	<select id="eggMetLocation2">
+	</select>
+	<br><br>
+	Egg Met Date:
+	<div id="eggMetDate"></div>
+	<br><br>
+	<table>
+		<tr>
+			<td></td>
+			<td>IVs</td>
+			<td>EVs</td>
+			<td>Stats</td>
+		</tr>
+		<tr>
+			<td>HP:</td>
+			<td id="hpIV"><input type="text" id="hpIVf" maxlength="2" oninput="ivChange(this)" value="0"></td>
+			<td id="hpEV"><input type="text" id="hpEVf" maxlength="3" oninput="evChange(this)" value="0"></td>
+			<td id="hpStat">0</td>
+		</tr>
+		<tr>
+			<td>Atk:</td>
+			<td id="atkIV"><input type="text" id="atkIVf" maxlength="2" oninput="ivChange(this)" value="0"></td>
+			<td id="atkEV"><input type="text" id="atkEVf" maxlength="3" oninput="evChange(this)" value="0"></td>
+			<td id="atkStat">0</td>
+		</tr>
+		<tr>
+			<td>Def:</td>
+			<td id="defIV"><input type="text" id="defIVf" maxlength="2" oninput="ivChange(this)" value="0"></td>
+			<td id="defEV"><input type="text" id="defEVf" maxlength="3" oninput="evChange(this)" value="0"></td>
+			<td id="defStat">0</td>
+		</tr>
+		<tr>
+			<td>SpA:</td>
+			<td id="spaIV"><input type="text" id="spaIVf" maxlength="2" oninput="ivChange(this)" value="0"></td>
+			<td id="spaEV"><input type="text" id="spaEVf" maxlength="3" oninput="evChange(this)" value="0"></td>
+			<td id="spaStat">0</td>
+		</tr>
+		<tr>
+			<td>SpD:</td>
+			<td id="spdIV"><input type="text" id="spdIVf" maxlength="2" oninput="ivChange(this)" value="0"></td>
+			<td id="spdEV"><input type="text" id="spdEVf" maxlength="3" oninput="evChange(this)" value="0"></td>
+			<td id="spdStat">0</td>
+		</tr>
+		<tr>
+			<td>Spe:</td>
+			<td id="speIV"><input type="text" id="speIVf" maxlength="2" oninput="ivChange(this)" value="0"></td>
+			<td id="speEV"><input type="text" id="speEVf" maxlength="3" oninput="evChange(this)" value="0"></td>
+			<td id="speStat">0</td>
+		</tr>
+	</table>
+	<br><br>
+	Current Moves:
+	<br>
+	<select id="move1">
+	</select>
+	<select id="move12">
+	</select>
+	<select id="move13">
+	</select>
+	<select id="move14">
+	</select>
+	<br>
+	<select id="move2">
+	</select>
+	<select id="move22">
+	</select>
+	<select id="move23">
+	</select>
+	<select id="move24">
+	</select>
+	<br>
+	<select id="move3">
+	</select>
+	<select id="move32">
+	</select>
+	<select id="move33">
+	</select>
+	<select id="move34">
+	</select>
+	<br>
+	<select id="move4">
+	</select>
+	<select id="move42">
+	</select>
+	<select id="move43">
+	</select>
+	<select id="move44">
+	</select>
+	<br><br>
+	Relearn Moves:
+	<br>
+	<select id="rmove1">
+	</select>
+	<select id="rmove12">
+	</select>
+	<select id="rmove13">
+	</select>
+	<select id="rmove14">
+	</select>
+	<br>
+	<select id="rmove2">
+	</select>
+	<select id="rmove22">
+	</select>
+	<select id="rmove23">
+	</select>
+	<select id="rmove24">
+	</select>
+	<br>
+	<select id="rmove3">
+	</select>
+	<select id="rmove32">
+	</select>
+	<select id="rmove33">
+	</select>
+	<select id="rmove34">
+	</select>
+	<br>
+	<select id="rmove4">
+	</select>
+	<select id="rmove42">
+	</select>
+	<select id="rmove43">
+	</select>
+	<select id="rmove44">
+	</select>
+	<br><br>
+	TID:
+	<input type="text" id="TID" maxlength="5" oninput="idValidate(this)" value="12345">
+	SID:
+	<input type="text" id="SID" maxlength="5" oninput="idValidate(this)" value="12345">
+	<br>
+	OT:
+	<input type="text" id="OT" maxlength="12" oninput="otValidate(this)" value="PokeTools">
+	<input type="text" id="otGender" disabled="true" value="Male">
+	<input type="button" id="otGenderBtn" value="Change Gender" onclick="changeGenders('otGender')">
+	<br><br>
+	Current Handler:
+	<br>
+	<select id="type">
+		<option>OT</option>
+		<option>NotOT</option>
+	</select>
+	<br><br>
+	Latest Handler:
+	<input type="text" id="nOT" maxlength="12" oninput="otValidate(this)" value="">
+	<input type="text" id="notGender" disabled="true" value="Male">
+	<input type="button" id="notGenderBtn" value="Change Gender" onclick="changeGenders('notGender')">
+	<br><br>
+	Residence:
+	<select id="rcountry" onchange="populateRSubRegion(null)">
+	</select>
+	<br>
+	Sub Region:
+	<select id="rsubregion">
+	</select>
+	<br><br>
+	<input type="checkbox" id="eventMem"> Traded Event Memory
+	<input type="checkbox" id="classicRibbon"> Classic Ribbon
+	<br><br>
+	Encryption Constant:
+	<input type="text" id="EC" maxlength="8" disabled="true" value="00000000">
+	<input type="button" id="ECroll" value="Reroll" onclick="rollEC()">
+	<br><br>
+	<input type="button" value="Inject" onclick="buildInject()">
+	<input type="button" value="Generate QR Code" onclick="buildQRCode()">
+	<input type="button" value="Ditto Prefill" onclick="makeDitto()">
+	<br>
+	<br>
+	<div id="qrcode"></div>
+</body>
+</html>
