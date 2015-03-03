@@ -3558,8 +3558,15 @@ function buildPkx() {
 		pkmnu8[0x33] = pkmnu8[0x33] | 0x4;
 	}
 
-	for (var i = 32; i < Pokedex[species].name.length + 32; i++) {
-		pkmnu16[i] = Pokedex[species].name.charCodeAt(i - 32);
+	if (document.getElementById('isNicknamed').checked == true) {
+		var nickname = document.getElementById('nickname').value;
+		for (var i = 32; i < nickname.length + 32; i++) {
+			pkmnu16[i] = nickname.charCodeAt(i - 32);
+		}
+	} else {
+		for (var i = 32; i < Pokedex[species].name.length + 32; i++) {
+			pkmnu16[i] = Pokedex[species].name.charCodeAt(i - 32);
+		}
 	}
 
 	// Moves
@@ -3669,6 +3676,10 @@ function buildPkx() {
 
 	if (document.getElementById('isEgg').checked) {
 		pkmnu32[29] = pkmnu32[29] | 0x40000000;
+	}
+
+	if (document.getElementById('isNicknamed').checked) {
+		pkmnu32[29] = pkmnu32[29] | 0x80000000;
 	}
 
 	var type = document.getElementById('type').selectedIndex;
