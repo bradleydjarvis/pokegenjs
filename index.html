@@ -30,7 +30,7 @@
 	<input type="text" id="nickname" maxlength="12" value="">
 	<br><br>
 	EXP: <input type="text" id="exp" maxlength="7" value="0" disabled="true">
-	Level: <input type="text" id="lvl" maxlength="3" oninput="lvlValidate(this)" onchange="lvlValidate(this)" value="0">
+	Level: <input type="text" id="lvl" maxlength="3" oninput="lvlValidate(this, true)" onchange="lvlValidate(this, true)" value="0">
 	<br><br>
 	Nature: <select id="nature"></select>
 	<br><br>
@@ -101,7 +101,7 @@
 	</select>
 	<br><br>
 	Met Level:
-	<input type="text" id="metlvl" maxlength="3" oninput="lvlValidate(this)" value="0">
+	<input type="text" id="metlvl" maxlength="3" oninput="lvlValidate(this, false)" value="0">
 	<br><br>
 	Met Date:
 	<div id="metDate"></div>

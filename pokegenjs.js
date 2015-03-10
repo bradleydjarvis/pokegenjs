@@ -3870,7 +3870,7 @@ function lvlValidateold() {
 	}
 }
 
-function lvlValidate(lvlInput) {
+function lvlValidate(lvlInput, updateExp) {
 	var regexp = /^[0-9]+$/gi;
 	var lvl = lvlInput.value;
 	var result = regexp.exec(lvl);
@@ -3896,7 +3896,7 @@ function lvlValidate(lvlInput) {
 		} else if (document.getElementById('species4').selectedIndex != 0) {
 			speciesIndex = document.getElementById('species4').selectedIndex + 597;
 		}
-		if (speciesIndex != 0) {
+		if (speciesIndex != 0 && updateExp == true) {
 			var EXP = growthTable[Pokedex[speciesIndex].growthID][parseInt(lvl)];
 			document.getElementById('exp').value = EXP.toString();
 		}
