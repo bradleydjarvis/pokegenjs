@@ -3693,7 +3693,7 @@ function buildPkx() {
 		for (var i = 60; i < notOTHandler.length + 60; i++) {
 			pkmnu16[i] = notOTHandler.charCodeAt(i - 60);
 		}
-		if (document.getElementById('nOTGender').value == "Female") {
+		if (document.getElementById('notGender').value == "Female") {
 			pkmnu8[0x92] = 1;
 		}
 		pkmnu8[0x93] = 1;
