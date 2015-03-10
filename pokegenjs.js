@@ -3558,6 +3558,10 @@ function buildPkx() {
 		pkmnu8[0x33] = pkmnu8[0x33] | 0x4;
 	}
 
+	if (document.getElementById('wishingRibbon').checked == true) {
+		pkmnu8[0x34] = pkmnu8[0x34] | 0x1;
+	}
+
 	if (document.getElementById('isNicknamed').checked == true) {
 		var nickname = document.getElementById('nickname').value;
 		for (var i = 32; i < nickname.length + 32; i++) {
