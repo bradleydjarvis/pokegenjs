@@ -3498,8 +3498,8 @@ function buildPkx() {
 	var heldItem = 0;
 	if (document.getElementById('heldItem').selectedIndex != 0) {
 		heldItem = document.getElementById('heldItem').selectedIndex;
-	} else if (document.getElementById('heldItem3').selectedIndex != 0) {
-		heldItem = document.getElementById('heldItem3').selectedIndex + 199;
+	} else if (document.getElementById('heldItem2').selectedIndex != 0) {
+		heldItem = document.getElementById('heldItem2').selectedIndex + 199;
 	} else if (document.getElementById('heldItem3').selectedIndex != 0) {
 		heldItem = document.getElementById('heldItem3').selectedIndex + 398;
 	} else if (document.getElementById('heldItem4').selectedIndex != 0) {
