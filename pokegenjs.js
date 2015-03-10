@@ -3643,7 +3643,7 @@ function populateHeldItems() {
 	none4.text = "None";
 	HISelect4.add(none4);
 
-	for (var i = 599; i < items.length; i++) {
+	for (var i = 598; i < items.length; i++) {
 		var option = document.createElement('option');
 		option.text = items[i];
 		HISelect4.add(option);
