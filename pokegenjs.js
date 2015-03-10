@@ -4528,7 +4528,11 @@ function buildPkx() {
 	pkmnu8[0xE0] = countryID;
 
 	pkmnu8[0xE2] = document.getElementById('3dsregion').selectedIndex;
-	pkmnu8[0xE3] = document.getElementById('lang').selectedIndex + 1;
+	var langid = document.getElementById('lang').selectedIndex + 1;
+	if (langid > 5) {
+		langid = langid + 1;
+	}
+	pkmnu8[0xE3] = langid;
 
 	var checksum = new Long.fromString("0", true, 10);
 	for (var i = 4; i < 116; i++) {
