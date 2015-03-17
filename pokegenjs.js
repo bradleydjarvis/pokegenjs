@@ -4309,6 +4309,10 @@ function buildPkx() {
 		pkmnu8[0x33] = pkmnu8[0x33] | 0x4;
 	}
 
+	if (document.getElementById('eventRibbon').checked == true) {
+		pkmnu8[0x33] = pkmnu8[0x33] | 0x10;
+	}
+
 	if (document.getElementById('wishingRibbon').checked == true) {
 		pkmnu8[0x34] = pkmnu8[0x34] | 0x1;
 	}
