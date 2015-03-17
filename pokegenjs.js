@@ -4576,7 +4576,7 @@ function makeDitto() {
 	document.getElementById('species').selectedIndex = 132;
 	speciesChange();
 	document.getElementById('lvl').value = "38";
-	lvlValidate(document.getElementById('lvl'));
+	lvlValidate(document.getElementById('lvl'), true);
 	document.getElementById('metlvl').value = "38";
 	lvlValidate(document.getElementById('metlvl'));
 	document.getElementById('lang').selectedIndex = 1;
