@@ -14,6 +14,8 @@
 	<h1>PokeGenJS</h1>
 	<h2>Copyright 2015 <a href="http://twitter.com/termana">Bradley Jarvis</a></h2>
 	<a href="NOTICES">Copyright Notices</a><br><br>
+	<input type="button" value="Ditto Prefill" onclick="makeDitto()">
+	<br><br>
 	<input type="button" id="shiny" value="Shiny" onclick="setShinyPID()">
 	PID: <input type="text" id="pid" maxlength="8" oninput="pidValidate()" disabled="true" value="00000000">
 	<input type="text" id="gender" disabled="true" value="Male">
@@ -280,7 +282,6 @@
 	<br><br>
 	<input type="button" value="Inject" onclick="buildInject()">
 	<input type="button" value="Generate QR Code" onclick="buildQRCode()">
-	<input type="button" value="Ditto Prefill" onclick="makeDitto()">
 	<br>
 	<br>
 	<div id="qrcode"></div>
