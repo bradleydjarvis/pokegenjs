@@ -4606,7 +4606,26 @@ function inject(pkmn) {
 	window.location = "http://lunarcookies.github.io/b1s1.html#" + pkmnstr;
 }
 
-function makeQRcode(pkmn) {
+function inject(pkmn) {
+	var pkmnstr = _arrayBufferToBase64(pkmn);
+	window.location = window.location.href + "b1s1.html#" + pkmnstr;
+}
+
+function makeQRcode1(pkmn) {
+	document.getElementById('qrcode').innerHTML = "";
+	var pkmnstr = _arrayBufferToBase64(pkmn);
+	var qrcode = new QRCode("qrcode", {
+    text: window.location.href + "b1s1.html#" + pkmnstr,
+    width: 300,
+    height: 300,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.L
+});
+}
+
+function makeQRcode2(pkmn) {
+	document.getElementById('qrcode').innerHTML = "";
 	var pkmnstr = _arrayBufferToBase64(pkmn);
 	var qrcode = new QRCode("qrcode", {
     text: "http://lunarcookies.github.io/b1s1.html#" + pkmnstr,
@@ -4616,6 +4635,12 @@ function makeQRcode(pkmn) {
     colorLight : "#ffffff",
     correctLevel : QRCode.CorrectLevel.L
 });
+}
+
+if (window.location.hostname == "") {
+	makeQRcode = makeQRcode2;
+} else {
+	makeQRcode = makeQRcode1;
 }
 
 function encryptPk6(pk6) {
