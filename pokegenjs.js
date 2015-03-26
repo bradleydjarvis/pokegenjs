@@ -4607,11 +4607,6 @@ function _arrayBufferToBase64( buffer ) {
 
 function inject(pkmn) {
 	var pkmnstr = _arrayBufferToBase64(pkmn);
-	window.location = "http://lunarcookies.github.io/b1s1.html#" + pkmnstr;
-}
-
-function inject(pkmn) {
-	var pkmnstr = _arrayBufferToBase64(pkmn);
 	window.location = window.location.href + "b1s1.html#" + pkmnstr;
 }
 
