@@ -4455,7 +4455,7 @@ function buildPkx() {
 		pkmnu8[0x93] = 1;
 
 		if (document.getElementById('rcountry').selectedIndex != 0) {
-			var countryIndex = document.getElementById('rcountry').selectedIndex;
+			var countryIndex = document.getElementById('rcountry').selectedIndex - 1;
 			var regionIndex = document.getElementById('rsubregion').selectedIndex;
 			var countryID = countries[countryIndex][0];
 			var regionID = countries[countryIndex][2][regionIndex][0];
